@@ -1,0 +1,92 @@
+body {
+    background-color: #F5F5F5;
+    color: #555555;
+}
+
+.form-control {
+    margin: 2px;
+    margin-left: 0px;
+    height: 30px;
+}
+
+.chosen-container-single .chosen-single {
+    height: 30px;
+    line-height: 30px;
+}
+
+label, h1, h2, h3, h4, h5, a, th, .navbar-default .navbar-nav>li>a {
+    color: #1b509c;
+}
+
+.rc-label, .rc-title {
+    color: #1b509c;
+    font-weight: 500;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 5px;
+}
+
+.label-right {
+    margin-left: 5px;
+}
+
+label, p {
+    margin-top: 7px;
+    margin-bottom: 2px;
+}
+
+label {
+    font-weight: 500;
+}
+
+.right {
+    text-align: right;
+}
+
+.error {
+    color: red;
+}
+
+.navbar {
+    background-color: #CCCCCB;
+}
+
+.login {
+    height: 100%;
+    background-image: url("/img/login_bg.svg");
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+.suma {
+    margin-bottom: 10px;
+}
+
+.panel-default > .panel-heading-custom {
+    color: #1b509c;
+    background: #CCCCCB;
+}
+
+.ecd-img {
+    max-width: 120px;
+    max-height: 120px;
+    padding: 5px;
+}
+
+.table>tbody>tr>td.buttons {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+@media (min-width: 1680px) {
+  .container {
+    width: 1600px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    width: 1820px;
+  }
+}
+

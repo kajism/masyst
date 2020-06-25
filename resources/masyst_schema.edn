@@ -1,0 +1,934 @@
+{:masyst/tx-attrs
+ {:txes [[{:db/ident :tx/uid
+           :db/doc "ID uzivatele, ktery provedl transakci"
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+
+ :masyst/common
+ {:txes [[{:db/ident :ent/title
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ent/type
+           :db/valueType :db.type/keyword
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ent/annotation
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+
+         [{:db/ident :ent/binder
+           :db/doc "In which binder is the document stored"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+
+         [{:db/id :ent/code
+           :db/unique :db.unique/value
+           :db.alter/_attribute :db.part/db}]
+
+         [{:db/ident :ent/user
+           :db/doc "Uzivatel, ktereho se entita tyka"
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :ent/from
+           :db/valueType :db.type/instant
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :ent/to
+           :db/valueType :db.type/instant
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :ent/duration-min
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :ent/automobile
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+
+ :masyst/user
+ {:txes [[{:db/ident :user/email
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :user/login
+           :db/valueType :db.type/string
+           :db/unique :db.unique/value
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :user/passwd
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/noHistory true
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :user/roles
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :user/login-count
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :role/right
+           :db/valueType :db.type/keyword
+           :db/cardinality :db.cardinality/many
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]
+  :requires [:masyst/common]}
+
+ :masyst/file
+ {:txes [[{:db/ident :file/orig-name
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :file/server-name
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :file/size
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :file/content-type
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :file/parent
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :file/view-count
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+
+ :masyst/tech-design
+ {:txes [[{:db/ident :tech-design/code
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :tech-design/material
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :tech-design/refs
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/many
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+
+ :masyst/order
+ {:txes [[#_{:db/ident :order/supplier
+             :db/valueType :db.type/ref
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+
+          #_{:db/ident :order/date
+             :db/valueType :db.type/instant
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}]]}
+
+ :masyst/invoice
+ {:txes [[{:db/ident :invoice/code ;; reused/renamed to :ent/code
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/unique :db.unique/identity
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/variable-symbol
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/price
+           :db/valueType :db.type/bigdec
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/paid
+           :db/valueType :db.type/bigdec
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/supplier
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/date
+           :db/valueType :db.type/instant
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/cost-center
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/due-date
+           :db/valueType :db.type/instant
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/text
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :invoice/checked
+           :db/valueType :db.type/boolean
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+
+         [{:db/id :invoice/supplier
+           :db/ident :ent/supplier}
+          {:db/id :invoice/cost-center
+           :db/ident :ent/cost-center}
+          {:db/id :invoice/date
+           :db/ident :ent/date}]
+         [{:db/id :invoice/code
+           :db/ident :ent/code}]]}
+
+ :masyst/contract
+ {:txes [[#_{:db/ident :contract/supplier
+             :db/valueType :db.type/ref
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          #_{:db/ident :contract/cost-center
+             :db/valueType :db.type/ref
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          #_{:db/ident :contract/date
+             :db/valueType :db.type/instant
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          {:db/ident :contract/subject
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :contract/price
+           :db/valueType :db.type/bigdec
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :contract/paid
+           :db/valueType :db.type/bigdec
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+
+ :masyst/ebs-attrs
+ {:txes [[{:db/ident :ebs/code
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/unique :db.unique/value
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ebs/code-ref
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ebs/other-category
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ebs-offer/winner?
+           :db/valueType :db.type/boolean
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ebs-calc/price
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ebs-calc/paid
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          {:db/ident :ebs-constr-diary/date
+           :db/valueType :db.type/instant
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+
+          #_{:db/ident :ebs-constr-diary/supplier
+             :db/valueType :db.type/ref
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}]
+         [{:db/ident :ebs-constr-diary/date-to
+           :db/valueType :db.type/instant
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+ :crm/partition
+ {:txes [[{:db/id #db/id[:db.part/db]
+           :db/ident :part/crm
+           :db.install/_partition :db.part/db}]]}
+ :crm/country
+ {:txes [[{:db/ident :country/code
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/unique :db.unique/identity
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          #_{:db/ident :country/name
+             :db/valueType :db.type/string
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}]]}
+ :crm/subject
+ {:txes [[{:db/ident :crm-subj/parent
+           :db/doc "Nadrazeny zaznam :crm-subj (firma, sidlo)"
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          #_{:db/ident :crm-subj/name
+             :db/doc "Nazev firmy"
+             :db/valueType :db.type/string
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/reg-no
+           :db/doc "IC"
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/tax-no
+           :db/doc "DIC"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/cust-no
+           :db/doc "Klienske cislo"
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/cust-code
+           :db/doc "Klientsky kod"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/person
+           :db/doc "Osoby"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/many
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/phone
+           :db/doc "Telefony"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/many
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/email
+           :db/doc "Emaily"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/many
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/street
+           :db/doc "Ulice"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/land-reg-no
+           :db/doc "Cislo popisne"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/house-no
+           :db/doc "Cislo orientacni"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/city
+           :db/doc "Mesto"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/zip-code
+           :db/doc "PSC"
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-subj/country
+           :db/doc "Stat"
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          #_{:db/ident :crm-subj/note
+             :db/doc "Poznamka"
+             :db/valueType :db.type/string
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}]]}
+ :crm/event-type
+ {:txes [[{:db/ident :crm-event.type/hotline
+           :ent/title "Hotline"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/activation
+           :ent/title "Odeslání aktivačního kódu"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/administrative
+           :ent/title "Administrativa"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/hotline-exceeded-warning
+           :ent/title "Odeslání emailu s upozorněním"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/coding
+           :ent/title "Programování"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/order
+           :ent/title "Objednávka"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/testing
+           :ent/title "Testování"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/information
+           :ent/title "Informace"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/fixing
+           :ent/title "Oprava"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/data-repair
+           :ent/title "Oprava dat"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/maintenance
+           :ent/title "Údržba"
+           :db/id #db/id [:part/crm]}
+          {:db/ident :crm-event.type/other
+           :ent/title "Ostatní"
+           :db/id #db/id [:part/crm]}]]
+  :requires [:masyst/common :crm/partition]}
+ :crm/project
+ {:txes [[#_{:db/ident :crm-project/name
+             :db/doc "Nazev projektu"
+             :db/valueType :db.type/string
+             :db/unique :db.unique/identity
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}]]}
+ :crm/product
+ {:txes [[#_{:db/ident :crm-product/name
+             :db/doc "Nazev produktu"
+             :db/valueType :db.type/string
+             :db/unique :db.unique/identity
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}]]}
+ :crm/event
+ {:txes [[#_{:db/ident :crm-event/date
+             :db/doc "Datum zadani"
+             :db/valueType :db.type/instant
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          {:db/ident :crm-event/type
+           :db/doc "Typ udalosti"
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-event/subject ;; renamed to :crm/subject
+           :db/doc "Klient"
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-event/duration
+           :db/doc "Doba trvani v minutach"
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          #_{:db/ident :crm-event/description
+             :db/doc "Popis"
+             :db/valueType :db.type/string
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          {:db/ident :crm-event/product ;; reused/renamed below as :crm-event/created-by
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-event/project
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+         [{:db/id :crm-event/subject
+           :db/ident :crm/subject}
+          {:db/id :crm-event/product
+           :db/ident :crm-event/created-by}]]}
+ :crm/sale
+ {:txes [[{:db/ident :crm-sale/subject ;; reused/renamed to :crm-sale/product
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/modules
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/modules-text
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/user-level
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/user-level-text
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/pcs
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/act-code
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          #_{:db/ident :crm-sale/date
+             :db/valueType :db.type/instant
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/expires
+           :db/valueType :db.type/instant
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          #_{:db/ident :crm-sale/note
+             :db/valueType :db.type/string
+             :db/cardinality :db.cardinality/one
+             :db/id #db/id [:db.part/db]
+             :db.install/_attribute :db.part/db}
+          {:db/ident :crm-sale/net-install
+           :db/valueType :db.type/boolean
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+         [{:db/id :crm-sale/subject
+           :db/ident :crm-sale/product}]]}
+ :masyst/partitions
+ {:txes [[;; :part/crm created above
+          {:db/id #db/id[:db.part/db]
+           :db/ident :part/ma
+           :db.install/_partition :db.part/db}
+          {:db/id #db/id[:db.part/db]
+           :db/ident :part/ebs
+           :db.install/_partition :db.part/db}]]}
+ :masyst/issues
+ {:txes [[{:db/ident :issue/closed?
+           :db/valueType :db.type/boolean
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :issue/state
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :issue/type
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :issue/priority
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :issue/project
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :issue/assignee
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+ :masyst/bank-holiday
+ {:txes [[{:db/ident :bank-holiday/label
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/unique :db.unique/value
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :bank-holiday/day
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :bank-holiday/month
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :bank-holiday/easter-delta
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+         [{:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Nový rok"
+           :bank-holiday/day 1
+           :bank-holiday/month 1
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Velký pátek"
+           :bank-holiday/easter-delta -3
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Velikonoční pondělí"
+           :bank-holiday/easter-delta 0
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Svátek práce"
+           :bank-holiday/day 1
+           :bank-holiday/month 5
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Den vítězství"
+           :bank-holiday/day 8
+           :bank-holiday/month 5
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Cyril a Metoděj"
+           :bank-holiday/day 5
+           :bank-holiday/month 7
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Mistr Jan Hus"
+           :bank-holiday/day 6
+           :bank-holiday/month 7
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Den české státnosti"
+           :bank-holiday/day 28
+           :bank-holiday/month 9
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Den vzniku samostatného československého státu"
+           :bank-holiday/day 28
+           :bank-holiday/month 10
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Den boje za svobodu a demokracii"
+           :bank-holiday/day 17
+           :bank-holiday/month 11
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "Štědrý den"
+           :bank-holiday/day 24
+           :bank-holiday/month 12
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "1. svátek vánoční"
+           :bank-holiday/day 25
+           :bank-holiday/month 12
+           :ent/type :bank-holiday}
+          {:db/id #db/id [:db.part/user]
+           :bank-holiday/label "2. svátek vánoční"
+           :bank-holiday/day 26
+           :bank-holiday/month 12
+           :ent/type :bank-holiday}]]}
+ :masyst/vacation
+ {:txes [[{:db/ident :vacation/half-day?
+           :db/valueType :db.type/boolean
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :vacation/working-days
+           :db/valueType :db.type/float
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+ :masyst/business-trip
+ {:txes [[{:db/ident :business-trip/where
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+ :masyst/expense
+ {:txes [[{:db/ident :expense/paid?
+           :db/valueType :db.type/boolean
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+ :masyst/drive-book-item
+ {:txes [[{:db/ident :drive-book-item/trip-description
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :drive-book-item/kms ;;renamed below to trip-kms
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :drive-book-item/refuel-litres
+           :db/valueType :db.type/float
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :drive-book-item/refuel-price ;; reused/renamed to :expense/price
+           :db/valueType :db.type/float
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+         [{:db/id :drive-book-item/kms
+           :db/ident :drive-book-item/trip-kms}
+          {:db/ident :drive-book-item/final-kms
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+         [{:db/id :drive-book-item/refuel-price
+           :db/ident :expense/price}]]}
+ :masyst/time-sheet
+ {:txes [[{:db/ident :time-sheet/items
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/many
+           :db/isComponent true
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+         [{:db/ident :time-sheet/daily-hours
+           :db/valueType :db.type/float
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}
+ :masyst/time-sheet-item
+ {:txes [[]
+         []
+         [{:db/ident :time-sheet-item/type
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :time-sheet-item-type/as-working-hours?
+           :db/valueType :db.type/boolean
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]
+         [{:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/in-work
+           :ent/title "Na pracovišti"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/on-the-road
+           :ent/title "Na cestě"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/homeoffice
+           :ent/title "Homeoffice"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/absence
+           :ent/title "Absence"
+           :time-sheet-item-type/as-working-hours? false
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/vacation
+           :ent/title "Dovolená"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/business-trip
+           :ent/title "Služební cesta"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/bank-holiday
+           :ent/title "Státní svátek"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/compensatory-leave
+           :ent/title "Náhradní volno"
+           :time-sheet-item-type/as-working-hours? true ;; changed to false below
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/medical-checkup
+           :ent/title "Návštěva lékaře"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/illness
+           :ent/title "Nemoc"
+           :time-sheet-item-type/as-working-hours? false
+           :ent/type :time-sheet-item-type}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/time-off
+           :ent/title "Pracovní volno"
+           :time-sheet-item-type/as-working-hours? true
+           :ent/type :time-sheet-item-type}]
+         [{:db/id #db/id [:db.part/user]
+           :db/ident :time-sheet-item-type/break
+           :ent/title "Přestávka"
+           :time-sheet-item-type/as-working-hours? false
+           :ent/type :time-sheet-item-type}]
+         [{:db/id :time-sheet-item-type/compensatory-leave
+           :time-sheet-item-type/as-working-hours? false}]]}
+ :masyst/approval
+ {:txes [[{:db/ident :ent/approval-status
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :ent/approval-note
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :approval-status/draft
+           :ent/title "Nepředloženo"
+           :ent/type :approval-status}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :approval-status/submitted
+           :ent/title "Předloženo"
+           :ent/type :approval-status}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :approval-status/approved
+           :ent/title "Schváleno"
+           :ent/type :approval-status}
+          {:db/id #db/id [:db.part/user]
+           :db/ident :approval-status/rejected
+           :ent/title "Zamítnuto"
+           :ent/type :approval-status}]]}
+ :pasman/tax-registration
+ {:txes [[{:db/ident :pasman/cottage-no
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :pasman/people
+           :db/valueType :db.type/ref
+           :db/cardinality :db.cardinality/many
+           :db/isComponent true
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :pasman/last-name
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :pasman/first-name
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :pasman/passport-no
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :pasman/address
+           :db/valueType :db.type/string
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :pasman/age
+           :db/valueType :db.type/long
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}
+          {:db/ident :pasman/group-uuid
+           :db/valueType :db.type/uuid
+           :db/cardinality :db.cardinality/one
+           :db/id #db/id [:db.part/db]
+           :db.install/_attribute :db.part/db}]]}}
